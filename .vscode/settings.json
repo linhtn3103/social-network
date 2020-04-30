@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "nodejs_login",
+            "dialect": "MySQL",
+            "name": "linh3103",
+            "password": "password",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}
