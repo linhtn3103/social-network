@@ -19,7 +19,7 @@ const initialState = {
   instagram: '',
 };
 
-const ProfileForm = ({
+const CreateProfile = ({
   profile: { profile, loading },
   createProfile,
   getCurrentProfile,
@@ -28,22 +28,6 @@ const ProfileForm = ({
   const [formData, setFormData] = useState(initialState);
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
-  useEffect(() => {
-    if (!profile) getCurrentProfile();
-    if (!loading && profile) {
-      const profileData = { ...initialState };
-      for (const key in profile) {
-        if (key in profileData) profileData[key] = profile[key];
-      }
-      for (const key in profile.social) {
-        if (key in profileData) profileData[key] = profile.social[key];
-      }
-      if (Array.isArray(profileData.skills))
-        profileData.skills = profileData.skills.join(', ');
-      setFormData(profileData);
-    }
-  }, [loading, getCurrentProfile, profile]);
 
   const {
     company,
@@ -65,7 +49,7 @@ const ProfileForm = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createProfile(formData, history, profile ? true : false);
+    createProfile(formData, history);
   };
 
   return (
@@ -241,7 +225,7 @@ const ProfileForm = ({
   );
 };
 
-ProfileForm.propTypes = {
+CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
@@ -252,5 +236,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-  ProfileForm
+  CreateProfile
 );
